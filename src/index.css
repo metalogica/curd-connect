@@ -1,17 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,800&family=JetBrains+Mono:wght@400;600;800&display=swap');
 @import "tailwindcss";
 
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --color-curd: #FACC15;
+  --color-gravy: #713F12;
+  --color-charcoal: #171717;
+  --color-black: #000000;
+  --color-offwhite: #FDFCF8;
+
   --font-sans: ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, "JetBrains Mono", monospace;
-  --color-brand: #4F46E5;
-  --color-surface-light: #FAFAF6;
-  --color-surface-dark: #0A0A0A;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
 html,
 body,
 #root {
   min-height: 100vh;
+}
+
+@layer base {
+  body {
+    @apply bg-offwhite text-charcoal font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .brutal-border {
+    @apply border-4 border-black;
+  }
+  .brutal-border-b {
+    @apply border-b-4 border-black;
+  }
+  .brutal-border-t {
+    @apply border-t-4 border-black;
+  }
+  .brutal-shadow {
+    box-shadow: 4px 4px 0px 0px #000000;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease, color 0.1s ease;
+  }
+  .brutal-shadow-sm {
+    box-shadow: 2px 2px 0px 0px #000000;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease, color 0.1s ease;
+  }
+  .brutal-hover:hover {
+    background-color: #000000;
+    color: #FACC15;
+  }
+  .brutal-active:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px 0px #000000;
+  }
 }
