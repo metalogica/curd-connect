@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignUpRouteImport } from './routes/sign-up'
 import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as MapRouteImport } from './routes/map'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
@@ -19,6 +20,11 @@ import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedCreateStoreRouteImport } from './routes/_authenticated/create-store'
 import { Route as AuthenticatedStoreIdReviewRouteImport } from './routes/_authenticated/store.$id.review'
 
+const SignUpRoute = SignUpRouteImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignInRoute = SignInRouteImport.update({
   id: '/sign-in',
   path: '/sign-in',
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/map': typeof MapRoute
   '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
   '/create-store': typeof AuthenticatedCreateStoreRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/profile/$id': typeof ProfileIdRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/map': typeof MapRoute
   '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
   '/create-store': typeof AuthenticatedCreateStoreRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/profile/$id': typeof ProfileIdRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/map': typeof MapRoute
   '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
   '/_authenticated/create-store': typeof AuthenticatedCreateStoreRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/profile/$id': typeof ProfileIdRoute
@@ -104,6 +113,7 @@ export interface FileRouteTypes {
     | '/'
     | '/map'
     | '/sign-in'
+    | '/sign-up'
     | '/create-store'
     | '/profile'
     | '/profile/$id'
@@ -114,6 +124,7 @@ export interface FileRouteTypes {
     | '/'
     | '/map'
     | '/sign-in'
+    | '/sign-up'
     | '/create-store'
     | '/profile'
     | '/profile/$id'
@@ -125,6 +136,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/map'
     | '/sign-in'
+    | '/sign-up'
     | '/_authenticated/create-store'
     | '/_authenticated/profile'
     | '/profile/$id'
@@ -137,12 +149,20 @@ export interface RootRouteChildren {
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   MapRoute: typeof MapRoute
   SignInRoute: typeof SignInRoute
+  SignUpRoute: typeof SignUpRoute
   ProfileIdRoute: typeof ProfileIdRoute
   StoreIdRoute: typeof StoreIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sign-up': {
+      id: '/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof SignUpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sign-in': {
       id: '/sign-in'
       path: '/sign-in'
@@ -230,6 +250,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   MapRoute: MapRoute,
   SignInRoute: SignInRoute,
+  SignUpRoute: SignUpRoute,
   ProfileIdRoute: ProfileIdRoute,
   StoreIdRoute: StoreIdRoute,
 }
